@@ -4,7 +4,8 @@ async function getSummary() {
   summaryDiv.innerHTML = "⏳ Fetching summary...";
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/api/summarize", {
+    const response = await fetch("https://wikipedia-backend.onrender.com/api/summarize",
+ {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
