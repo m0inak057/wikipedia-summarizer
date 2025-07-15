@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: wikipedia-backend
+    env: python
+    buildCommand: ""
+    startCommand: "python backend/app.py"
+    autoDeploy: true
