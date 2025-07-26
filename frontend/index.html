@@ -4,14 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wikipedia Summarizer</title>
+  <meta name="description" content="Get quick Wikipedia summaries for any topic instantly" />
   <link rel="stylesheet" href="stylesheet.css" />
 </head>
 <body>
   <div class="container">
     <h1>🔍 Wikipedia Summarizer</h1>
-    <input type="text" id="topic" placeholder="Enter a topic..." />
-    <button onclick="getSummary()">Get Summary</button>
-    <div id="summary"></div>
+    <p class="subtitle">Get instant summaries from Wikipedia</p>
+    
+    <div class="input-group">
+      <input 
+        type="text" 
+        id="topic" 
+        placeholder="Enter a topic (e.g., Albert Einstein, Python programming)..." 
+        autocomplete="off"
+        spellcheck="true"
+      />
+      <button id="search-btn" onclick="getSummary()">
+        <span id="btn-text">Get Summary</span>
+        <span id="btn-loading" style="display: none;">⏳ Loading...</span>
+      </button>
+    </div>
+    
+    <div id="summary" class="summary-container"></div>
+    
+    <div class="footer">
+      <p>Powered by Wikipedia API | Made with ❤️</p>
+    </div>
   </div>
 
   <script src="scripts.js"></script>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wikipedia Summarizer - Local Test</title>
+  <link rel="stylesheet" href="stylesheet.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 Wikipedia Summarizer</h1>
+    <p class="subtitle">Get instant summaries from Wikipedia (Local Test)</p>
+    <input type="text" id="topic" placeholder="Enter a topic (e.g., Albert Einstein, Python programming)..." />
+    <button onclick="getSummary()">Get Summary</button>
+    <div id="summary"></div>
+    <div class="footer">
+      <p>Powered by Wikipedia API | Made with ❤️</p>
+    </div>
+  </div>
+
+  <script>
+    // Override API URL for local testing
+    const API_URL = 'http://localhost:5000';
+
+    async function getSummary() {
+      const topic = document.getElementById('topic').value.trim();
+      const summaryDiv = document.getElementById('summary');
+      const button = document.querySelector('button');
+
+      if (!topic) {
+        summaryDiv.innerHTML = `
+          <div class="error">
+            <span class="error-icon">⚠️</span>
+            <strong>Input Required</strong>
+            <p>Please enter a topic to search for.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Show loading state
+      button.textContent = 'Loading...';
+      button.disabled = true;
+      summaryDiv.innerHTML = `
+        <div class="loading">
+          <div class="spinner"></div>
+          <p>Searching Wikipedia...</p>
+        </div>
+      `;
+
+      try {
+        const response = await fetch(`${API_URL}/api/summarize`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ topic }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          summaryDiv.innerHTML = `
+            <div class="success">
+              <h3>📄 ${data.topic}</h3>
+              <p>${data.summary}</p>
+            </div>
+          `;
+        } else {
+          if (data.options) {
+            // Disambiguation error
+            summaryDiv.innerHTML = `
+              <div class="warning">
+                <span class="warning-icon">🔍</span>
+                <strong>Multiple Results Found</strong>
+                <p>${data.message}</p>
+                <div class="suggestions">
+                  <p><strong>Suggestions:</strong></p>
+                  <ul>
+                    ${data.options.map(option => `<li>${option}</li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+            `;
+          } else {
+            // Other errors
+            summaryDiv.innerHTML = `
+              <div class="error">
+                <span class="error-icon">❌</span>
+                <strong>${data.error}</strong>
+                <p>${data.message}</p>
+              </div>
+            `;
+          }
+        }
+      } catch (error) {
+        console.error('Request failed:', error);
+        summaryDiv.innerHTML = `
+          <div class="error">
+            <span class="error-icon">🚫</span>
+            <strong>Cannot connect to server.</strong>
+            <p>Please check your internet connection or try again later.</p>
+          </div>
+        `;
+      } finally {
+        button.textContent = 'Get Summary';
+        button.disabled = false;
+      }
+    }
+
+    // Allow Enter key to trigger search
+    document.getElementById('topic').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        getSummary();
+      }
+    });
+
+    // Test API connection on page load
+    window.addEventListener('load', async function() {
+      try {
+        const response = await fetch(`${API_URL}/`);
+        if (response.ok) {
+          console.log('✅ API connection successful');
+        }
+      } catch (error) {
+        console.error('❌ API connection failed:', error);
+        document.getElementById('summary').innerHTML = `
+          <div class="warning">
+            <span class="warning-icon">⚠️</span>
+            <strong>Connection Warning</strong>
+            <p>Unable to connect to the API server. Please check your internet connection.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,99 +1,199 @@
 
- 📄 Wikipedia Summarizer
+# 📄 Wikipedia Summarizer
 
-A clean and responsive web application that summarizes any topic using the **Wikipedia API**. Built with a lightweight **HTML/CSS/JS frontend** and a **Python Flask backend**.
+A modern, responsive web application that provides instant Wikipedia summaries for any topic. Built with a clean **HTML/CSS/JS frontend** and a robust **Python Flask backend**.
 
+## 🔗 Live Demo
 
-### 🔗 Live Demo
+👉 **Frontend (Vercel)**: [https://your-vercel-link.vercel.app](https://your-vercel-link.vercel.app)  
+👉 **Backend API (Render)**: [https://wikipedia-summarizer-backend.onrender.com](https://wikipedia-summarizer-backend.onrender.com)
 
-👉 Frontend (Vercel): [https://your-vercel-link.vercel.app](https://your-vercel-link.vercel.app)
+## 🧠 Features
 
-
-### 🧠 Features
-
-* 🔍 Search for any topic from Wikipedia
-* 📄 Displays a 5-sentence summary
-* ⚠️ Handles ambiguous topics with smart suggestions
-* ❌ Graceful handling of missing topics
-* 🌐 Fully responsive and mobile-friendly
-* 🎨 Smooth hover and focus effects
-
----
-
-### 🛠️ Tech Stack
-
-**Frontend:**
-
-* HTML5
-* CSS3 (with responsive design)
-* JavaScript (Fetch API)
-
-**Backend:**
-
-* Python 3
-* Flask
-* Wikipedia (Python library)
-* Flask-CORS
+* 🔍 **Smart Search**: Search for any topic from Wikipedia
+* 📄 **Instant Summaries**: Get concise 5-sentence summaries
+* ⚠️ **Disambiguation Handling**: Smart suggestions for ambiguous topics
+* ❌ **Error Handling**: Graceful handling of missing topics and network issues
+* 🌐 **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+* ⚡ **Fast & Reliable**: Optimized for speed with proper timeout handling
+* 🎨 **Modern UI**: Clean, accessible interface with loading states
+* ⌨️ **Keyboard Support**: Press Enter to search
 
 ---
 
-### 🚀 Getting Started
+## 🛠️ Tech Stack
 
-#### 1. Clone the repo
+### Frontend
+* **HTML5** - Semantic markup with accessibility features
+* **CSS3** - Modern styling with gradients, animations, and responsive design
+* **Vanilla JavaScript** - ES6+ with Fetch API and async/await
+* **Vercel** - Static site hosting and deployment
 
+### Backend
+* **Python 3.9+** - Modern Python with type hints
+* **Flask** - Lightweight web framework
+* **Wikipedia API** - Python library for Wikipedia access
+* **Flask-CORS** - Cross-origin resource sharing
+* **Gunicorn** - Production WSGI server
+* **Render** - Cloud hosting platform
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+* Python 3.9 or higher
+* Node.js (for local development)
+* Git
+
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/your-username/wikipedia-summarizer.git
 cd wikipedia-summarizer
 ```
 
-#### 2. Backend Setup
-
+### 2. Backend Setup
 ```bash
 cd backend
-pip install flask wikipedia flask-cors
+pip install -r requirements.txt
 python app.py
 ```
+The backend will run on `http://localhost:5000`
 
-Make sure Flask is running on `http://127.0.0.1:5000`.
-
-#### 3. Frontend Setup
-
-Open `frontend/index.html` directly in a browser, or deploy using Vercel.
+### 3. Frontend Setup
+```bash
+cd frontend
+# Open index.html in your browser or use a local server
+python -m http.server 8000
+# Visit http://localhost:8000
+```
 
 ---
 
-### 📁 Project Structure
+## 📁 Project Structure
 
 ```
 wikipedia-summarizer/
 │
 ├── backend/
-│   └── app.py              # Flask backend serving the summary API
+│   ├── app.py              # Flask API server
+│   └── requirements.txt    # Python dependencies
 │
 ├── frontend/
-│   ├── index.html          # Main HTML interface
-│   ├── style.css           # CSS styles and media queries
-│   └── script.js           # JavaScript to call Flask API
+│   ├── index.html          # Main HTML page
+│   ├── stylesheet.css      # Styles and responsive design
+│   ├── scripts.js          # JavaScript functionality
+│   └── vercel.json         # Vercel deployment config
 │
-├── main.py                 # Optional entry point or utility script
+├── main.py                 # Standalone CLI version
+├── render.yaml             # Render deployment config
 └── README.md               # This file
 ```
 
 ---
 
-### ✨ Future Improvements
+## 🌐 Deployment
 
-* Voice-based search input
-* Multilingual Wikipedia summaries
-* Rich media preview (images + links)
-* Serverless backend deployment
+### Backend Deployment (Render)
+1. Connect your GitHub repository to Render
+2. Create a new Web Service
+3. Use the following settings:
+   - **Build Command**: `pip install -r backend/requirements.txt`
+   - **Start Command**: `gunicorn --bind 0.0.0.0:$PORT backend.app:app`
+   - **Environment**: Python 3.9.16
+
+### Frontend Deployment (Vercel)
+1. Connect your GitHub repository to Vercel
+2. Set the root directory to `frontend/`
+3. Deploy automatically on push
 
 ---
 
-### 🙌 Author
+## 🔧 API Endpoints
 
-Made by Moinak Mondal 
-LinkedIn - https://www.linkedin.com/in/moinakm/
-Feel free to fork, star, or suggest improvements!
+### `GET /`
+Health check endpoint
+```json
+{
+  "status": "Wikipedia Summarizer API is running!",
+  "version": "1.0.0"
+}
+```
+
+### `POST /api/summarize`
+Get Wikipedia summary for a topic
+```json
+// Request
+{
+  "topic": "Albert Einstein"
+}
+
+// Success Response
+{
+  "summary": "Albert Einstein was a German-born theoretical physicist...",
+  "topic": "Albert Einstein"
+}
+
+// Error Response
+{
+  "error": "No page found",
+  "message": "No Wikipedia page found for this topic."
+}
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**CORS Errors**: Make sure the backend is running and accessible
+**Timeout Errors**: Check your internet connection and try again
+**Deployment Issues**: Verify environment variables and build commands
+
+### Error Codes
+* `400` - Bad request (missing topic or ambiguous)
+* `404` - Page not found
+* `408` - Request timeout
+* `500` - Internal server error
+
+---
+
+## ✨ Future Improvements
+
+* 🎤 Voice-based search input
+* 🌍 Multilingual Wikipedia summaries
+* 🖼️ Rich media preview (images + links)
+* 📱 Progressive Web App (PWA) features
+* 🔍 Search history and favorites
+* 📊 Usage analytics dashboard
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙌 Author
+
+**Moinak Mondal**  
+🔗 LinkedIn: [https://www.linkedin.com/in/moinakm/](https://www.linkedin.com/in/moinakm/)  
+📧 Email: your-email@example.com
+
+---
+
+⭐ **Star this repo if you found it helpful!**
 
 

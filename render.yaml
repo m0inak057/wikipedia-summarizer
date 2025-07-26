@@ -2,6 +2,9 @@ services:
   - type: web
     name: wikipedia-backend
     env: python
-    buildCommand: ""
-    startCommand: "python backend/app.py"
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "gunicorn --bind 0.0.0.0:$PORT backend.app:app"
     autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.9.16"
