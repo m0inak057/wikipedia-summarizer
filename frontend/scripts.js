@@ -1,5 +1,5 @@
 // Configuration for API endpoint
-const API_BASE_URL = "https://wikipedia-summarizer-backend.onrender.com";
+const API_BASE_URL = "https://wikipedia-summarizer-moinak.onrender.com";
 
 // UI Elements
 let topicInput, summaryDiv, searchBtn, btnText, btnLoading;
