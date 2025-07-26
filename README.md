@@ -1,4 +1,3 @@
-
 # 📄 Wikipedia Summarizer
 
 A modern, responsive web application that provides instant Wikipedia summaries for any topic. Built with a clean **HTML/CSS/JS frontend** and a robust **Python Flask backend**.
@@ -48,7 +47,7 @@ A modern, responsive web application that provides instant Wikipedia summaries f
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/wikipedia-summarizer.git
+git clone https://github.com/m0inak057/wikipedia-summarizer.git
 cd wikipedia-summarizer
 ```
 
@@ -189,11 +188,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙌 Author
 
 **Moinak Mondal**  
-🔗 LinkedIn: [https://www.linkedin.com/in/moinakm/](https://www.linkedin.com/in/moinakm/)  
-📧 Email: your-email@example.com
+🔗 GitHub: [https://github.com/m0inak057](https://github.com/m0inak057)  
+📧 Email: moinak.mondal@example.com
 
 ---
 
 ⭐ **Star this repo if you found it helpful!**
-
-
