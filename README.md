@@ -4,7 +4,7 @@ A modern, responsive web application that provides instant Wikipedia summaries f
 
 ## 🔗 Live Demo
 
-👉 **Frontend (Vercel)**: [https://wikipedia-summarizer-moinak1.vercel.app](https://wikipedia-summarizer-moinak1.vercel.app)  
+👉 **Frontend (Vercel)**: [[https://wikipedia-summarizer-moinak1.vercel.app](https://news-scraper-ivory.vercel.app/))  
 👉 **Backend API (Render)**: [[https://wikipedia-summarizer-moinak.onrender.com](https://wikipedia-summarizer-moinak.onrender.com)
 
 ## 🧠 Features
